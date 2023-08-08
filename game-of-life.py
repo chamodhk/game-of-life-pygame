@@ -1,18 +1,16 @@
-from pickle import FALSE
-from pydoc import cli
-import secrets
+
 import pygame
 
 WIDTH = 800
 HEIGHT = 800
 
-WHITE = (255,255,255),
-GREY = (60,60,60)
-BLACK = (0,0,0)
+WHITE = (255, 255, 255),
+GREY = (60, 60, 60)
+BLACK = (0, 0, 0)
 
 
 pygame.init()
-screen = pygame.display.set_mode((WIDTH,HEIGHT))
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Life Game")
 clock = pygame.time.Clock()
 
@@ -29,80 +27,65 @@ box_height = HEIGHT / y_boxes
 
 boxes = []
 
-clicked = [[-1 for _ in range(x_boxes)] for _ in range(y_boxes)  ]
+clicked = [[-1 for _ in range(x_boxes)] for _ in range(y_boxes)]
 
 
 def check_rule(clicked):
-    cells_to_die =[]
-    cells_to_born =[]
+    cells_to_die = []
+    cells_to_born = []
     for i in range(len(clicked)):
         for j in range(len(clicked[i])):
             if clicked[i][j] == -1:
                 live_cell_count = 0
-                
-                rows = [i-1,i,i+1]
-                cols = [j-1,j,j+1]
+
+                rows = [i-1, i, i+1]
+                cols = [j-1, j, j+1]
                 try:
                     for row in rows:
                         for col in cols:
-                            
+
                             if (row == i) and (col == j):
                                 pass
                             else:
                                 if clicked[row][col] == 1:
                                     live_cell_count += 1
-                    
-                
 
                     if live_cell_count == 3:
-                        cells_to_born.append((row-1,col-1))
+                        cells_to_born.append((i, j))
                 except IndexError:
                     pass
-            
+
             else:
                 live_cell_count = 0
-                
-                rows = [i-1,i,i+1]
-                cols = [j-1,j,j+1]
+
+                rows = [i-1, i, i+1]
+                cols = [j-1, j, j+1]
                 try:
                     for row in rows:
                         for col in cols:
-                            if (row-1==i) and (col-1 == j):
+                            if (row == i) and (col == j):
                                 pass
                             else:
                                 if clicked[row][col] == 1:
-                                    live_cell_count +=1
-                    if live_cell_count != 3:
-                        
-                        cells_to_die.append((row-1, col-1))
+                                    live_cell_count += 1
+                    if (live_cell_count > 3) or (live_cell_count <2):
+
+                        cells_to_die.append((i, j))
 
                 except IndexError:
                     pass
-                
 
     for i in cells_to_die:
-        
+
         clicked[i[0]][i[1]] = -1
 
     for j in cells_to_born:
         clicked[j[0]][j[1]] = 1
 
-    
-
     return clicked
 
 
-
-            
-     
-                    
-
-            
-
-    
-
-def draw_grid( clicked ):
-    
+def draw_grid(clicked):
 
     for i in range(x_boxes):
         for j in range(y_boxes):
@@ -121,7 +104,7 @@ def draw_grid( clicked ):
                 )
             )
 
-            boxes.append((box, (i,j)))
+            boxes.append((box, (i, j)))
 
     for i in range(x_boxes):
         pygame.draw.line(
@@ -141,9 +124,6 @@ def draw_grid( clicked ):
 
         )
 
-
-
-
     return boxes
 
 
@@ -153,36 +133,23 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                setting = False
-                
-                
-        
+                setting = not(setting)
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if setting:
                 for box in boxes:
                     if box[0].collidepoint(pygame.mouse.get_pos()):
-                        clicked[box[1][0]][box[1][1]] *= -1   
-                        
-                    
-            
-            
-                    
+                        clicked[box[1][0]][box[1][1]] *= -1
 
     screen.fill(BLACK)
     if setting:
         pass
     else:
         clicked = check_rule(clicked)
-        
-        
 
     boxes = draw_grid(clicked)
 
-
-
-    
-    
     pygame.display.flip()
-    clock.tick(10)
+    clock.tick(1)
 
 pygame.quit()
