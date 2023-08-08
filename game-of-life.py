@@ -5,7 +5,7 @@ WIDTH = 800
 HEIGHT = 800
 
 WHITE = (255, 255, 255),
-GREY = (60, 60, 60)
+
 BLACK = (0, 0, 0)
 
 
@@ -92,7 +92,7 @@ def draw_grid(clicked):
             if clicked[i][j] == 1:
                 color = WHITE
             else:
-                color = GREY
+                color = BLACK
             box = pygame.draw.rect(
                 screen,
                 color,
@@ -106,21 +106,21 @@ def draw_grid(clicked):
 
             boxes.append((box, (i, j)))
 
-    for i in range(x_boxes):
+    for i in range(1,x_boxes):
         pygame.draw.line(
             screen,
             WHITE,
-            (i*box_width, 0),
-            (i*box_width, HEIGHT),
+            ((i*box_width), 0),
+            ((i*box_width), HEIGHT),
 
         )
 
-    for j in range(y_boxes):
+    for j in range(1,y_boxes):
         pygame.draw.line(
             screen,
             WHITE,
-            (0, j*box_height),
-            (WIDTH, j*box_height),
+            (0, (j*box_height)),
+            (WIDTH, (j*box_height)),
 
         )
 
@@ -150,6 +150,6 @@ while running:
     boxes = draw_grid(clicked)
 
     pygame.display.flip()
-    clock.tick(1)
+    clock.tick(60)
 
 pygame.quit()
