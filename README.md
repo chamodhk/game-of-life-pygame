@@ -13,4 +13,4 @@ Inspired by Veritassium which is my favorite youtube channel.
 
 # Watch the video from Veritasium
 
-[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)]([https://youtu.be/nTQUwghvy5Q](https://youtu.be/HeQX2HjkcNo?t=66))
+[![Watch the video](https://img.youtube.com/vi/HeQX2HjkcNo/sddefault.jpg)]([https://youtu.be/nTQUwghvy5Q](https://youtu.be/HeQX2HjkcNo?t=66))
