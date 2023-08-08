@@ -10,3 +10,7 @@ Inspired by Veritassium which is my favorite youtube channel.
 4. Mark the initial live cells by clicking on them
 5. when you are done, press enter key and enjoy.
 
+
+# Watch the video from Veritasium
+
+[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)]([https://youtu.be/nTQUwghvy5Q](https://youtu.be/HeQX2HjkcNo?t=66))
